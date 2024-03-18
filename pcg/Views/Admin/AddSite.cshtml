@@ -1,0 +1,85 @@
+﻿@model pcg.Models.SitesModel
+
+@{
+    ViewData["Title"] = "Add Site";
+}
+
+<h1 style="text-align:center">Add Site</h1>
+<div class="row justify-content-center mt-3">
+<div class="col-md-4 text-center" ">
+    <button id="add-card-btn" class="btn btn-success btn-block">Add Site</button>
+</div>
+    </div>
+
+<div class="container mt-3 mb-5">
+    <div class="row justify-content-center" id="card-container">
+        <!-- Card template hidden by default -->
+        <div class="card-template d-none col-md-4">
+            <div class="card shadow-lg mt-3">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Add Site</h5>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Client</label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="Client">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputAddress">Site</label>
+                                <input type="text" class="form-control" id="inputAddress" placeholder="Site">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label asp-for="SiteSOM" class="control-label text-right"> Operation Manager</label>
+                                <select asp-for="SiteSOM" class="form-control">
+                                    <option value="a">Mr. Yuse</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SiteSOM" class="control-label text-right">Sr. Operation Manager</label>
+                                <select asp-for="SiteSOM" class="form-control">
+                                    <option value="a">Mr. Yuse</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SiteSOM" class="control-label text-right">Site Coordinator</label>
+                                <select asp-for="SiteSOM" class="form-control">
+                                    <option value="a">Mr. Yuse</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SiteSOM" class="control-label text-right">Time Keeper</label>
+                                <select asp-for="SiteSOM" class="form-control">
+                                    <option value="a">Mr. Yuse</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Add Site</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <d
+</div>
+
+@section Scripts {
+    <script>
+        // Function to add a new card
+        function addCard() {
+            var cardContainer = document.getElementById('card-container');
+            var cardTemplate = document.querySelector('.card-template').cloneNode(true);
+            cardTemplate.classList.remove('d-none'); // Show the cloned card
+            cardContainer.appendChild(cardTemplate); // Append the cloned card
+        }
+
+        // Event listener for the Add Card button
+        document.getElementById('add-card-btn').addEventListener('click', addCard);
+    </script>
+}

@@ -1,0 +1,38 @@
+﻿@model pcg.Models.VariationModel
+
+@{
+    ViewData["Title"] = "Forward";
+}
+<h1 style="text-align:center">Forward Task</h1>
+<table class="table table-hover table-responsive-sm table-sm">
+    <thead>
+        <tr>
+            <th class="text-center text-uppercase">TaskId</th>
+            <th class="text-center text-uppercase">Task</th>
+            <th class="text-center text-uppercase">Remarks</th> 
+            <th class="text-center text-uppercase">Description</th>
+            <th class="text-center text-uppercase">Assigned To</th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        <tr>
+            <td class="text-center text-nowrap">dgjey</td>
+            <td class="text-center text-nowrap">qkeeiy</td>
+            <td class="text-center text-nowrap">elemenopi</td>
+            <td class="text-center text-nowrap">qkyoowu</td>
+            <td class="text-center text-nowrap">aarrrgh</td>       
+        </tr>
+    </tbody>
+</table>
+<form asp-controller="Admin" asp-action="TaskForward" method="post">
+<div>
+    <label asp-for="AssignId" class="control-label">Select Assignee</label>
+        <select asp-for="AssignId" class="form-control">
+            <option value="a">i am your father</option>
+        </select>
+</div>
+<div>
+        <input type="hidden" name="taskId" value="123" />
+        <input type="submit" value="Forward" class="btn btn-primary" />
+</div>
+</form>

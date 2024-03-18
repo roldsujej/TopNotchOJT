@@ -1,0 +1,97 @@
+﻿@model pcg.Models.ChangeInfo
+
+@{
+    ViewData["Title"] = "Update Profile";
+}
+
+<head>
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<style>
+    .card {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center; /* Center aligning content */
+    }
+
+    .form-group {
+        text-align: left; /* Align form labels and inputs to the left */
+    }
+</style>
+
+<h1 style="text-align:center">Update Info</h1>
+
+<div class="card mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="ChangeInfo">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" placeholder="omae wa" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" placeholder="mo shindeiru" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactNo" class="control-label"></label>
+                    <input asp-for="ContactNo" class="form-control" placeholder="nani!!!" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <div class="input-group">
+                        <input asp-for="Password" id="passwordField" type="password" class="form-control" />
+                        <div class="input-group-append">
+                            <button id="togglePassword" class="btn btn-outline-secondary" type="button">
+                                <i id="eyeIcon" class="far fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <label asp-for="Confirm" class="control-label"></label>
+
+                    <input asp-for="Confirm" type="password" class="form-control" />
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update Info" asp-action="ChangeInfo" class="btn btn-primary" style="width: 100%" />
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <!-- JavaScript for toggling password visibility -->
+    <script>
+        const passwordField = document.getElementById('passwordField');
+        const togglePassword = document.getElementById('togglePassword');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        // Initially set the password field as type password and eye icon as closed
+        passwordField.setAttribute('type', 'password');
+        eyeIcon.classList.add('fa-eye-slash');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            // Toggle eye icon class between fa-eye and fa-eye-slash
+            eyeIcon.classList.toggle('fa-eye-slash');
+            eyeIcon.classList.toggle('fa-eye');
+        });
+    </script>
+
+    <!-- Other scripts -->
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    </script>
+    }
+

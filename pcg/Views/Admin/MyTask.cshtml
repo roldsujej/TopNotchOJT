@@ -1,0 +1,129 @@
+﻿<!-- HTML Table with Pagination and Page Numbers -->
+<div class="container mt-4">
+    <h2 class="text-center">Task List</h2>
+    <table id="taskTable" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Task no.</th>
+                <th>Task</th>
+                <th>Remarks</th>
+                <th>Description</th>
+                <th>Assignee</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be dynamically added here -->
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation">
+        <ul id="pagination" class="pagination justify-content-center">
+            <li class="page-item" id="prevPage">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <!-- Page Numbers will be dynamically added here -->
+            <li class="page-item" id="nextPage">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<script>
+    // Sample data for demonstration
+    const tasks = [
+        { taskNo: 1, task: "Task 1", remarks: "Remarks for Task 1", description: "Description of Task 1", assignee: "John Doe" },
+        { taskNo: 2, task: "Task 2", remarks: "Remarks for Task 2", description: "Description of Task 2", assignee: "Jane Doe" },
+        { taskNo: 3, task: "Task 3", remarks: "Remarks for Task 3", description: "Description of Task 3", assignee: "Alice" },
+        { taskNo: 4, task: "Task 4", remarks: "Remarks for Task 4", description: "Description of Task 4", assignee: "Bob" },
+        { taskNo: 5, task: "Task 5", remarks: "Remarks for Task 5", description: "Description of Task 5", assignee: "Eve" },
+        { taskNo: 6, task: "Task 6", remarks: "Remarks for Task 6", description: "Description of Task 6", assignee: "Adam" },
+        { taskNo: 7, task: "Task 6", remarks: "Remarks for Task 6", description: "Description of Task 6", assignee: "Adam" },
+        { taskNo: 8, task: "Task 6", remarks: "Remarks for Task 6", description: "Description of Task 6", assignee: "Adam" },
+        { taskNo: 9, task: "Task 6", remarks: "Remarks for Task 6", description: "Description of Task 6", assignee: "Adam" },
+        { taskNo: 10, task: "Task 6", remarks: "Remarks for Task 6", description: "Description of Task 6", assignee: "Adam" },
+        // Add more tasks as needed
+    ];
+
+    // Function to populate table rows
+    function populateTable(pageNum) {
+        const tableBody = document.querySelector("#taskTable tbody");
+        tableBody.innerHTML = "";
+        const pageSize = 5; // Updated to show 5 tasks per page
+        const startIndex = (pageNum - 1) * pageSize;
+        const endIndex = Math.min(startIndex + pageSize, tasks.length);
+        for (let i = startIndex; i < endIndex; i++) {
+            const task = tasks[i];
+            const row = `
+                            <tr>
+                                <td>${task.taskNo}</td>
+                                <td>${task.task}</td>
+                                <td>${task.remarks}</td>
+                                <td>${task.description}</td>
+                                <td>${task.assignee}</td>
+                            </tr>
+                        `;
+            tableBody.innerHTML += row;
+        }
+    }
+
+    // Pagination logic
+    let currentPage = 1;
+    const prevPageBtn = document.querySelector("#prevPage");
+    const nextPageBtn = document.querySelector("#nextPage");
+    const pagination = document.getElementById("pagination");
+
+    prevPageBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            populateTable(currentPage);
+            updatePagination();
+        }
+    });
+
+    nextPageBtn.addEventListener("click", () => {
+        const totalPages = Math.ceil(tasks.length / 5);
+        if (currentPage < totalPages) {
+            currentPage++;
+            populateTable(currentPage);
+            updatePagination();
+        }
+    });
+
+    function updatePagination() {
+        const totalPages = Math.ceil(tasks.length / 5);
+        pagination.innerHTML = "";
+        for (let i = 1; i <= totalPages; i++) {
+            const pageItem = document.createElement("li");
+            pageItem.classList.add("page-item");
+            if (i === currentPage) {
+                pageItem.classList.add("active");
+            }
+            const pageLink = document.createElement("a");
+            pageLink.classList.add("page-link");
+            pageLink.href = "#";
+            pageLink.textContent = i;
+            pageLink.addEventListener("click", () => {
+                currentPage = i;
+                populateTable(currentPage);
+                updatePagination();
+            });
+            pageItem.appendChild(pageLink);
+            pagination.appendChild(pageItem);
+        }
+        // Disable previous and next buttons based on current page
+        if (currentPage === 1) {
+            prevPageBtn.classList.add("disabled");
+        } else {
+            prevPageBtn.classList.remove("disabled");
+        }
+        if (currentPage === totalPages) {
+            nextPageBtn.classList.add("disabled");
+        } else {
+            nextPageBtn.classList.remove("disabled");
+        }
+    }
+
+    // Initial population of table and pagination
+    populateTable(currentPage);
+    updatePagination();
+</script>

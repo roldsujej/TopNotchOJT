@@ -1,0 +1,53 @@
+﻿@model pcg.Models.ChangeInfo
+
+@{
+    ViewData["Title"] = "Update Profile";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Update Your Profile</h2>
+                    <form asp-action="ChangeInfo" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label">Name</label>
+                            <input asp-for="Name" class="form-control" placeholder="@Model.CurName" />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label">Email</label>
+                            <input asp-for="Email" class="form-control" placeholder="@Model.CurEmail" />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="ContactNo" class="control-label">Contact Number</label>
+                            <input asp-for="ContactNo" class="form-control" placeholder="@Model.CurContact" />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label">New Password</label>
+                            <input asp-for="Password" type="password" class="form-control" />
+
+                            <label asp-for="Confirm" class="control-label">Confirm New Password</label>
+                            <input asp-for="Confirm" type="password" class="form-control" />
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Update Profile</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
